@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form{
+            width: 500px;
+            margin: auto;
+        }
+        #shuru{
+            width: 500px;
+            height: 150px;
+            border: 2px solid black;
+            font-size: 20px;
+            text-line-through: single;
+        }
+        #confirm{
+            width: 80px;
+            height: 30px;
+            float: right;
+        }
+        ol{
+            padding-top: 50px;
+            width: 500px;
+            margin: auto;
+        }
+        hr{
+            height: 1px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <!--多数据输入-->
+    <textarea type="text" id="shuru"></textarea>
+    <input type="button" id="confirm" value="提交" onclick="show()">
+</form>
+<ol id="list"></ol>
+</body>
+</html>
+<script>
+    function show(){
+        let text = document.getElementById("shuru").value;
+        let  list = document.getElementById("list");
+        console.log(text);
+        let element = document.createElement("li");
+        let element1 = document.createElement('hr');
+        element.innerText=text;
+        element.style.fontWeight='bold';
+        list.appendChild(element);
+        list.append(element1);
+    }
+</script>
