@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #head{
+      width: 600px;
+      height: 30px;
+      margin: auto;
+      border: 1px solid black;
+    }
+    .pp{
+      float: left;
+      width: 200px;
+      height: 30px;
+      text-align: center;
+      background-color: #000;
+      color: #fff;
+    }
+    dl{
+      border: 1px solid black;
+      width: 600px;
+      margin: auto;
+      font-size: 20px;
+      display: none;
+    }
+    hr{
+      border: 1px dashed #999999;
+    }
+  </style>
+</head>
+<body>
+<div id="head">
+  <span id="x1" class="pp">热门排行</span>
+  <span id="x2" class="pp">美图速递</span>
+  <span id="x3" class="pp">前沿科技</span>
+</div>
+<dl id="y1">
+  <dd>习近平出席推进“—带—路"建设工作5周年座谈会</dd>
+  <hr>
+  <dd>中共时隔近三年再修党纪条例这些高压线不能碰</dd>
+  <hr>
+  <dd>全国高中2019年秋季起分步实施新课程使用新教材</dd>
+  <hr>
+  <dd>个税法修正案草案将二审起征点会否超5000元?</dd>
+  <hr>
+</dl>
+<dl id="y2">
+  <dd>鹅教官、羊陪练.......这所中学养的动物成了“网红”</dd>
+  <hr>
+  <dd>最伤身体的10个生活习惯，一定要避开</dd>
+  <hr>
+  <dd>12岁孩子带着父亲去西藏吃住行自己拿主意</dd>
+  <hr>
+  <dd>16岁男孩暑假干了俩月工地，练出满身肌肉，只为赚学费</dd>
+  <hr>
+</dl>
+<dl id="y3">
+  <dd>aaaaaaaaaaaaaaaaaaaaaa</dd>
+  <hr>
+  <dd>bbbbbbbbbbbbbbbbbbbbbbbbbbb</dd>
+  <hr>
+  <dd>ccccccccccccccccccccccccccccccccc</dd>
+  <hr>
+  <dd>ddddddddddddddddddddddddddddddddddddddddd</dd>
+  <hr>
+</dl>
+</body>
+</html>
+
+<script>
+  let x1 = document.getElementById("x1");
+  let x2 = document.getElementById("x2");
+  let x3 = document.getElementById("x3");
+  let y1 = document.getElementById("y1");
+  let y2 = document.getElementById("y2");
+  let y3 = document.getElementById("y3");
+  x1.onmouseenter = function (){
+    x1.style.backgroundColor = "#aaa";
+    y1.style.display = "block";
+  }
+  x1.onmouseleave = function (){
+    x1.style.backgroundColor = "#000";
+    y1.style.display = "none";
+  }
+  x2.onmouseenter = function (){
+    x2.style.backgroundColor = "#aaa";
+    y2.style.display = "block";
+  }
+
+  x2.onmouseleave = function (){
+    x2.style.backgroundColor = "#000";
+    y2.style.display = "none";
+  }
+  x3.onmouseenter = function (){
+    x3.style.backgroundColor = "#aaa";
+    y3.style.display = "block";
+  }
+  x3.onmouseleave = function (){
+    x3.style.backgroundColor = "#000";
+    y3.style.display = "none";
+  }
+</script>

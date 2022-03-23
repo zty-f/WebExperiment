@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    form{
+      width: 400px;
+      margin: auto;
+      height: 330px;
+      background-color: #10d1ea;
+    }
+    #head{
+      padding-top: 4px;
+      height: 30px;
+      background-color: #5ea6f1;
+      text-align: center;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #username{
+      margin-top: 45px;
+      margin-left: 70px;
+      width: 250px;
+      display: block;
+      height: 40px;
+    }
+    #pass{
+      margin-left: 70px;
+      width: 250px;
+      display: block;
+      height: 35px;
+    }
+    button{
+      height: 40px;
+      width: 250px;
+      margin-left: 70px;
+      background-color: #5ea6f1;
+      text-align: center;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+    }
+    #p1{
+      width: 250px;
+      margin-left: 70px;
+      font-size: 10px;
+      color: red;
+      display: none;
+    }
+    #p2{
+      width: 250px;
+      margin-left: 70px;
+      font-size: 10px;
+      color: red;
+      display: none;
+    }
+    #p3{
+      width: 250px;
+      margin-left: 70px;
+      font-size: 10px;
+      color: red;
+      display: none;
+    }
+    .box{
+      height: 35px;
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+<form>
+  <div id="head">注册</div>
+  <input type="text" placeholder="请输入您的用户名" id="username">
+  <div class="box">
+    <p id="p1">用户名必须以英文字母开头！</p>
+  </div>
+  <input type="password" placeholder="请输入您的密码" id="pass">
+  <div class="box">
+    <p id="p2">密码长度不能小于6位！</p>
+  </div>
+  <button type="button" onclick="return check()">提交</button>
+  <div class="box">
+    <p id="p3">登录成功！</p>
+  </div>
+</form>
+</body>
+</html>
+<script>
+  function check(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("pass").value;
+    let p1 = document.getElementById("p1");
+    let p2 = document.getElementById("p2");
+    let p3 = document.getElementById("p3");
+     let length = password.length;
+     let first = username.charAt(0);
+     let a = true;
+     let b = true;
+     if(first < 65||( first >90&& first <97)|| first >122){
+       p1.style.display='block';
+       p2.style.display='none';
+       p3.style.display='none';
+       a = false;
+     }
+     if(length<6){
+       if(a){
+         p1.style.display='none';
+       }
+       p2.style.display='block';
+       p3.style.display='none';
+       b = false;
+     }
+     if(a&&b){
+       p1.style.display='none';
+       p2.style.display='none';
+       p3.style.display='block';
+     }
+     return true;
+  }
+</script>
