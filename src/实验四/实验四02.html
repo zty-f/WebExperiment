@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "jquery-3.6.0.js"></script>
+    <style>
+        div{
+            margin: auto;
+            width: 480px;
+            padding-bottom: 20px;
+        }
+        table{
+            margin: auto;
+        }
+        tr{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <span>查询：</span> <input type="text">
+</div>
+<table border="1px" cellspacing="0">
+    <thead>
+        <tr>
+            <td width="200px">姓名</td>
+            <td width="80px">性别</td>
+            <td width="200px">暂住地</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="name">张三</td>
+            <td>男</td>
+            <td>四川成都</td>
+        </tr>
+        <tr>
+            <td class="name">周八</td>
+            <td>男</td>
+            <td>上海浦东</td>
+        </tr>
+        <tr>
+            <td class="name">冯五</td>
+            <td>女</td>
+            <td>湖北武汉</td>
+        </tr>
+        <tr>
+            <td class="name">mark</td>
+            <td>女</td>
+            <td>四川凉山</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+<script>
+    let list = $("tbody tr");
+    for (let i = 0; i < list.length; i++) {
+        if (i%2==0){
+            list[i].style.backgroundColor = "#FFF38F";
+        }else{
+            list[i].style.backgroundColor = "#FFFFEE";
+        }
+    }
+    $("input").on("input",function() {
+        var text=$("input").val();
+        $(".name").parent().hide();
+        $(".name").filter(":contains("+text+")").parent().show();
+    });
+</script>

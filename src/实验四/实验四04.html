@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src = "jquery-3.6.0.js"></script>
+  <style>
+    #head{
+      margin: auto;
+      width: 800px;
+      text-align: center;
+    }
+    button{
+      margin-top: 10px;
+      margin-bottom: 50px;
+    }
+    table{
+      margin: auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div id="head">
+  <h3>添加新成员</h3>
+  <div>
+    name：<input type="text" id="name">
+    email：<input type="text" id="email">
+    salary：<input type="text" id="salary">
+  </div>
+  <button type="button" onclick="submit()">Submit</button>
+</div>
+<hr>
+<table border="1px" cellspacing="0">
+  <thead>
+      <tr>
+        <td width="80px">Name</td>
+        <td width="140px">Email</td>
+        <td width="80px">Salary</td>
+        <td width="80px"></td>
+      </tr>
+  </thead>
+  <tbody id="body"></tbody>
+</table>
+</body>
+</html>
+<script>
+  function submit(){
+    let name = $("#name").val();
+    let email = $("#email").val();
+    let salary = $("#salary").val();
+    let newTr = "<tr>\n" +
+            "        <td>"+name+"</td>\n" +
+            "        <td>"+email+"</td>\n" +
+            "        <td>"+salary+"</td>\n" +
+            "        <td><a href='#'>Delete</a></td>\n" +
+            "      </tr>";
+    $("#body").append(newTr);
+    $("a").click(function (){
+      $(this).parent().parent().remove();
+    });
+  }
+</script>

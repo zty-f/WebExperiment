@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src = "jquery-3.6.0.js"></script>
+  <style>
+    body{
+        margin: auto;
+        width: 400px;
+    }
+    select{
+      border: 1px solid blue;
+      border-radius: 5px;
+      width: 150px;
+    }
+    select:focus{
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+<select id="province">
+    <option value="0">请选择省份</option>
+    <option value="1">湖北省</option>
+    <option value="2">四川省</option>
+</select>
+<select id="city"></select>
+</body>
+</html>
+<script>
+  var cities=[["请选择城市"],["黄冈","武汉","黄石"],["成都","绵阳","德阳"]];
+  $("#province").change(function (){
+      var index = $("#province").val();
+      console.log(index);
+      $("#city").empty();
+      for(var i=0;i<cities[index].length;i++)
+      {
+          var newoption="<option>"+cities[index][i]+"</option>";
+          $("#city").append(newoption)
+      }
+  })
+</script>

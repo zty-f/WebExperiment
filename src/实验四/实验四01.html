@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "jquery-3.6.0.js"></script>
+
+    <style>
+        table{
+            margin: auto;
+        }
+        td{
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table border="1" cellspacing="0">
+    <thead>
+    <tr>
+        <td></td>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>暂住地</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="radio"></td>
+        <td>张三</td>
+        <td>男</td>
+        <td>四川绵阳</td>
+    </tr>
+    <tr>
+        <td><input type="radio"></td>
+        <td>王五</td>
+        <td>男</td>
+        <td>四川宜宾</td>
+    </tr>
+    <tr>
+        <td><input type="radio"></td>
+        <td>赵六</td>
+        <td>女</td>
+        <td>四川成都</td>
+    </tr>
+    <tr>
+        <td><input type="radio"></td>
+        <td>马冬梅</td>
+        <td>男</td>
+        <td>四川德阳</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+<script>
+    let list = $("tbody tr");
+    for (let i = 0; i < list.length; i++) {
+        if (i%2==0){
+            list[i].style.backgroundColor = "#FFF38F";
+        }else{
+            list[i].style.backgroundColor = "#FFFFEE";
+        }
+    }
+    $("tbody").click(function () {
+            var tr = event.srcElement.parentElement;
+            var row = tr.rowIndex;
+            $("tr:eq(" + row + ")").css("background", "#FF6500");
+            $("tr:eq(" + row + ") input").attr("checked","checked");
+        }
+    )
+</script>
