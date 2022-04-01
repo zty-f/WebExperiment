@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "/js/jquery-3.6.0.js"></script>
+    <style>
+        #out{
+            margin: auto;
+            width: 1000px;
+            height: 2000px;
+            border: 1px solid black;
+            background-color: cornsilk;
+        }
+        h3{
+            margin-left: 400px;
+            width: 200px;
+        }
+        #head{
+            margin: auto;
+            width: 800px;
+            height: 30px;
+            border: 2px solid black;
+            margin-bottom: 10px;
+            padding-top: 5px;
+            background-color: aquamarine;
+        }
+        button{
+            width: 80px;
+            background-color: aliceblue;
+            text-align: center;
+            color: blue;
+            font-weight: bold;
+        }
+        table{
+            margin: auto;
+            text-align: center;
+        }
+        #thead{
+            background-color: gray;
+            font-weight: bold;
+        }
+        #table{
+            border: 1px solid greenyellow;
+        }
+    </style>
+</head>
+<body>
+<div id="out">
+    <h3>学生信息管理系统</h3>
+    <div id="head">
+        学号：<input type="text" id="stuNo">
+        姓名：<input type="text" id="stuName">
+        专业：<input type="text" id="stuMajor">
+        <input type="hidden" id="updateId" value="-1">
+        <button type="button" onclick="check()">确认</button>
+    </div>
+    <table border="1px" cellspacing="0" id="table">
+        <thead id="thead">
+        <tr>
+            <td width="300px">学号</td>
+            <td width="100px">姓名</td>
+            <td width="200px">专业</td>
+            <td width="200px">操作</td>
+        </tr>
+        </thead>
+        <tbody id="body"></tbody>
+    </table>
+</div>
+
+</body>
+</html>
+<script>
+    $(function (){
+        init();
+    });
+
+    function check(){
+        let id = $("#updateId").val();
+        if (id==-1){
+            addStu();
+        }else {
+            doUpdate();
+        }
+    }
+    function render(data){
+        let id = data.stuId;
+        let no = data.stuNo;
+        let name = data.stuName;
+        let major = data.stuMajor;
+        let newTr = "<tr><input type=\"hidden\" id=\"stuId\" value="+id+">\n" +
+            "        <td id='no'>"+no+"</td>\n" +
+            "        <td id='name'>"+name+"</td>\n" +
+            "        <td id='major'>"+major+"</td>\n" +
+            "        <td><a href='#' id='updateStu' onclick='updateStu($(this))'>修改</a>|<a href='#' id='deleteStu' onclick='deleteStu($(this).parent().parent().children(\"#stuId\").val())'>删除</a></td>\n" +
+            "      </tr>";
+        $("#body").append(newTr);
+    }
+
+    function init(){
+        $.ajax({
+            url:"http://120.46.143.125:8080/stu/list",
+            type:"GET",
+            success:function (data){
+                if(data.code==200){
+                    for (let i = 0; i < data.data.length; i++) {
+                        render(data.data[i]);
+                    }
+                }else{
+                    console.log(data.msg);
+                }
+            },
+            error:function (){
+                console.log("客户端请求错误！")
+            }
+        })
+    }
+
+    function addStu(){
+        let stuNo = $("#stuNo").val();
+        let stuName = $("#stuName").val();
+        let stuMajor = $("#stuMajor").val();
+        $.ajax({
+            url:"http://120.46.143.125:8080/stu/insertStu",
+            type:"POST",
+            data:{
+                stuNo:stuNo,
+                stuName:stuName,
+                stuMajor:stuMajor
+            },
+            success:function (data){
+                if(data.code==200){
+                    $("#body").empty();
+                    init();
+                    alert("添加成功！");
+                }else{
+                    console.log(data.msg);
+                    alert("添加失败！");
+                }
+            },
+            error:function (){
+                console.log("客户端请求错误！")
+            }
+        })
+    }
+
+    function deleteStu(id){
+        $.ajax({
+            url:"http://120.46.143.125:8080/stu/deleteStu/"+id,
+            type:"POST",
+            success:function (data){
+                if(data.code==200){
+                    $("#body").empty();
+                    init();
+                    alert("删除成功！");
+                }else{
+                    console.log(data.msg);
+                    alert("删除失败！");
+                }
+            },
+            error:function (){
+                console.log("客户端请求错误！");
+            }
+        })
+    }
+
+    function updateStu(node){
+        $("#stuNo").val(node.parent().parent().children("#no").text());
+        $("#stuName").val(node.parent().parent().children("#name").text());
+        $("#stuMajor").val(node.parent().parent().children("#major").text());
+        $("#updateId").val(node.parent().parent().children("#stuId").val());
+    }
+    function doUpdate(){
+        let stuId = $("#updateId").val();
+        let stuNo = $("#stuNo").val();
+        let stuName = $("#stuName").val();
+        let stuMajor = $("#stuMajor").val();
+        $.ajax({
+            url:"http://120.46.143.125:8080/stu/updateStu",
+            type:"POST",
+            data:{
+                stuId:stuId,
+                stuNo:stuNo,
+                stuName:stuName,
+                stuMajor:stuMajor
+            },
+            success:function (data){
+                if(data.code==200){
+                    $("#body").empty();
+                    init();
+                    alert("更新成功！");
+                }else{
+                    console.log(data.msg);
+                    alert("更新失败！");
+                }
+            },
+            error:function (){
+                console.log("客户端请求错误！")
+            }
+        })
+    }
+</script>
