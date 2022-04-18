@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品录入</title>
+    <script src = "js/jquery-3.1.1.min.js"></script>
+    <link href="css/input.css" rel="stylesheet" type="text/css" />
+    <style>
+        #search div:first-child{
+            float: left;
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        #submit input{
+            width: 268px;
+        }
+        #error{
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<div id="search">
+    <div>产品名称</div>
+    <div><input type="text" placeholder="请输入产品名称"></div>
+</div>
+<div id="error"></div>
+<div id="submit"><input type="button" value="录入"></div>
+</body>
+</html>
+<script>
+    $("#submit input").click(function (){
+        let msg = $("#search input").val();
+        if(msg.length==0){
+            $("#error").text("产品名称必须输入！");
+            return;
+        }
+        for (let i = 0; i < msg.length; i++) {
+            if (msg[i]>=0||msg[i]<=9){
+                $("#error").text("产品名称不能含有数字！")
+                return;
+            }
+        }
+        window.location = "product.html";
+    })
+</script>

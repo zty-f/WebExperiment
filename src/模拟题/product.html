@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <style>
+        table{
+            text-align: center;
+        }
+        table tr:nth-child(1) td{
+            height: 30px;
+        }
+        table tr td{
+            height: 100px;
+        }
+        table img{
+            width: 100px;
+            height: 100px;
+        }
+        table a{
+            color: #00ff00;
+        }
+        table a:hover{
+            color: #ff0000;
+        }
+        table tr td:nth-child(4){
+            background-color: #ffffd0;
+        }
+    </style>
+</head>
+<body>
+<div><input type="text" id="name" placeholder="请输入产品名称"> <input type="button" id="search" value="搜索"></div>
+<div id="product">
+</div>
+</body>
+</html>
+<script>
+    $("#search").click(function (){
+        let msg = $("#name").val();
+        $.ajax({
+            url:"http://47.108.14.103:8001/getProduct",
+            type:"POST",
+            data:{
+                name:msg,
+            },
+            success:function (data){
+                if (data.code==200){
+                    //document.write(JSON.stringify(data));	//打印JSON字串
+                    console.log(data.data);
+                        render(data.data);
+                }
+            }
+        })
+    })
+    function render(data){
+        var htmlText = "<table border='1' cellspacing='0'>";
+        htmlText += "<tr>";
+        htmlText += "<th width='100px'>图片</th>";
+        htmlText += "<th width='150px'>品牌</th>";
+        htmlText += "<th width='150px'>型号</th>";
+        htmlText += "<th width='150px'>价格</th>";
+        htmlText += "</tr>";
+        for (let i = 0; i < data.length; i++) {
+            let img = "http://47.108.14.103:8001/img/"+data[i].image;
+            let brand = data[i].brand;
+            let model = data[i].model;
+            let price = data[i].price;
+            let newTr = "<tr>\n" +
+                "                <td ><img src=' "+img+" '></td>\n" +
+                "                <td >"+brand+"</td>\n" +
+                "                <td ><a href=' "+img+" '>"+model+"</a></td>\n" +
+                "                <td >"+price+"</td>\n" +
+                "            </tr>";
+            htmlText+=newTr;
+        }
+        htmlText+="</table>";
+        $("#product").html(htmlText);
+    }
+</script>
